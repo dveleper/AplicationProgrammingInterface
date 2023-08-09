@@ -1,15 +1,14 @@
-package com.neoris.aplicationprogramminginterface.domain.puerto;
+package com.neoris.aplicationprogramminginterface.application.service.cuenta;
 
 import com.neoris.aplicationprogramminginterface.domain.model.Cuenta;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
-public interface CuentaRepository {
+public interface CuentaService {
     Cuenta crear(Cuenta cuenta);
     Cuenta editar(Cuenta cuenta);
     void eliminar(UUID cuentaId);
     List<Cuenta> obtenerCuentas();
-    Optional<Cuenta> obtenerCuentaPorId(UUID cuentaId);
+    Cuenta obtenerCuentaPorId(UUID cuentaId);
 }
