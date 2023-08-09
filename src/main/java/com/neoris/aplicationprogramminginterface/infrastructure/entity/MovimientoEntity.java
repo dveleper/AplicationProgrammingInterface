@@ -10,11 +10,11 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Entity
-@Table(name = "movimiento")
-@Data
+//@Entity
+//@Table(name = "movimiento")
+//@Data
 public class MovimientoEntity {
-    @Id
+//    @Id
     private UUID movimientoId;
     private LocalDate fecha;
     private String tipo;

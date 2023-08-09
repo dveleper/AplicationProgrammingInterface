@@ -5,6 +5,7 @@ import com.neoris.aplicationprogramminginterface.domain.port.ClienteRepository;
 import com.neoris.aplicationprogramminginterface.infrastructure.adaptador.mapper.ClienteMapper;
 import com.neoris.aplicationprogramminginterface.infrastructure.entity.ClienteEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +18,7 @@ public class ClienteRepositoryMysqlImpl implements ClienteRepository {
     @Autowired
     private ClienteMapper clienteMapper;
 
-    public ClienteRepositoryMysqlImpl(ClienteRepositoryMysql repositoryMysql) {
+    public ClienteRepositoryMysqlImpl(@Lazy ClienteRepositoryMysql repositoryMysql) {
         this.repositoryMysql = repositoryMysql;
     }
 
