@@ -12,7 +12,7 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "cliente")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance
 @Data
 public class ClienteEntity extends PersonaEntity {
     @Id

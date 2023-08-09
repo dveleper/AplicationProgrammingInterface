@@ -1,8 +1,13 @@
 package com.neoris.aplicationprogramminginterface.infrastructure.entity;
 
-import lombok.Data;
-@Data
-public abstract class PersonaEntity {
+import jakarta.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@MappedSuperclass
+public class PersonaEntity {
     private String identificacion;
     private String nombre;
     private String genero;
