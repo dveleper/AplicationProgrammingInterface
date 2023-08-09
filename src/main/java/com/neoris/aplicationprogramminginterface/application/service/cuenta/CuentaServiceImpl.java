@@ -1,7 +1,7 @@
 package com.neoris.aplicationprogramminginterface.application.service.cuenta;
 
 import com.neoris.aplicationprogramminginterface.domain.model.Cuenta;
-import com.neoris.aplicationprogramminginterface.domain.puerto.CuentaRepository;
+import com.neoris.aplicationprogramminginterface.domain.port.CuentaRepository;
 
 import java.util.List;
 import java.util.UUID;

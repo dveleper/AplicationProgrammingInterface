@@ -1,7 +1,7 @@
 package com.neoris.aplicationprogramminginterface.application.service.movimiento;
 
 import com.neoris.aplicationprogramminginterface.domain.model.Movimiento;
-import com.neoris.aplicationprogramminginterface.domain.puerto.MovimientoRepository;
+import com.neoris.aplicationprogramminginterface.domain.port.MovimientoRepository;
 
 import java.time.LocalDate;
 import java.util.List;

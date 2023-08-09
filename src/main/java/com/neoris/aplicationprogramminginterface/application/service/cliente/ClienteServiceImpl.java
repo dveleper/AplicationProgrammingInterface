@@ -1,10 +1,9 @@
 package com.neoris.aplicationprogramminginterface.application.service.cliente;
 
 import com.neoris.aplicationprogramminginterface.domain.model.Cliente;
-import com.neoris.aplicationprogramminginterface.domain.puerto.ClienteRepository;
+import com.neoris.aplicationprogramminginterface.domain.port.ClienteRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 public class ClienteServiceImpl implements ClienteService {

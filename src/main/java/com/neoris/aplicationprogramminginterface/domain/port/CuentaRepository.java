@@ -1,4 +1,4 @@
-package com.neoris.aplicationprogramminginterface.domain.puerto;
+package com.neoris.aplicationprogramminginterface.domain.port;
 
 import com.neoris.aplicationprogramminginterface.domain.model.Cuenta;
 
