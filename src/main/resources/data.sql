@@ -1,0 +1,2 @@
+insert into cliente (cliente_id, contrasena, estado, identificacion, nombre, genero, edad, direccion, telefono)
+values ("a2720191-1cc6-11eb-9a2c-107d1a24f935", "123", "activo", "123654", "pedro paramo", "masculino", 32, "calle 170 cra 10", "55555");
