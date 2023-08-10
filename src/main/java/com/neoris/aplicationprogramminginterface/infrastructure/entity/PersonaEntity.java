@@ -1,11 +1,9 @@
 package com.neoris.aplicationprogramminginterface.infrastructure.entity;
 
 import jakarta.persistence.MappedSuperclass;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @MappedSuperclass
 public class PersonaEntity {
     private String identificacion;
