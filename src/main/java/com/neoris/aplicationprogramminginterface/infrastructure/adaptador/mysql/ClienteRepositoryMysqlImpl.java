@@ -51,7 +51,7 @@ public class ClienteRepositoryMysqlImpl implements ClienteRepository {
     @Override
     public Optional<Cliente> obtenerClientePorId(UUID clienteId) {
         return Optional.of(repositoryMysql.findById(clienteId)
-                .map(entity -> clienteMapper.toCliente(entity))
+                .map(clienteMapper::toCliente)
                 .orElseThrow()); //TODO: IMPLEMENTAR EXCEPCION PERSONALIZADA
     }
 }
