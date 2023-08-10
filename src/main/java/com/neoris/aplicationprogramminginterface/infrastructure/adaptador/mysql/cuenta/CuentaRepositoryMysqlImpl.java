@@ -4,6 +4,7 @@ import com.neoris.aplicationprogramminginterface.domain.model.Cuenta;
 import com.neoris.aplicationprogramminginterface.domain.port.CuentaRepository;
 import com.neoris.aplicationprogramminginterface.infrastructure.adaptador.mysql.cliente.ClienteRepositoryMysql;
 import com.neoris.aplicationprogramminginterface.infrastructure.entity.ClienteEntity;
+import com.neoris.aplicationprogramminginterface.infrastructure.entity.CuentaEntity;
 import com.neoris.aplicationprogramminginterface.infrastructure.exceptions.ResourceNotFoundException;
 import com.neoris.aplicationprogramminginterface.infrastructure.rest.mapper.ClienteMapper;
 import com.neoris.aplicationprogramminginterface.infrastructure.rest.mapper.CuentaMapper;
@@ -41,11 +42,14 @@ public class CuentaRepositoryMysqlImpl implements CuentaRepository {
 
     @Override
     public Cuenta editar(Cuenta cuenta, UUID cuentaId) {
-        return cuentaRepositoryMysql.findById(cuentaId)
-                .map(cuentaEntity ->
-                        cuentaMapper.toCuenta(
-                                cuentaRepositoryMysql.save(
-                                        cuentaMapper.toCuentaEntity(cuenta))))
+        return cuentaRepositoryMysql.findById(cuentaId).map(cuenta_ -> {
+                    cuenta.setCuentaId(cuentaId);
+                    cuenta.setCliente(clienteMapper.toCliente(cuenta_.getCliente()));
+                    return cuentaMapper.toCuenta(
+                            cuentaRepositoryMysql.save(
+                                    cuentaMapper.toCuentaEntity(cuenta)));
+
+                })
                 .orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado"));
     }
 

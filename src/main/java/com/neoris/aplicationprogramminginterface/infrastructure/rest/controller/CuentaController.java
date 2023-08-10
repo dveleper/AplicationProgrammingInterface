@@ -5,10 +5,9 @@ import com.neoris.aplicationprogramminginterface.domain.model.Cuenta;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/cuentas")
@@ -23,5 +22,25 @@ public class CuentaController {
     @PostMapping
     public ResponseEntity<Cuenta> saveAccount(@RequestBody Cuenta cuenta) {
         return new ResponseEntity<>(this.cuentaService.crear(cuenta), HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<Iterable<Cuenta>> getAccounts() {
+        return new ResponseEntity<>(this.cuentaService.obtenerCuentas(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{cuentaId}")
+    public ResponseEntity<Cuenta> getAccountById(@PathVariable UUID cuentaId) {
+        return new ResponseEntity<>(this.cuentaService.obtenerCuentaPorId(cuentaId), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{cuentaId}")
+    public void deleteAccount(@PathVariable UUID cuentaId) {
+        this.cuentaService.eliminar(cuentaId);
+    }
+
+    @PutMapping("/{cuentaId}")
+    public ResponseEntity<Cuenta> updateAccount(@PathVariable UUID cuentaId, @RequestBody Cuenta cuenta) {
+        return new ResponseEntity<>(this.cuentaService.editar(cuenta, cuentaId), HttpStatus.OK);
     }
 }
