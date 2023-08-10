@@ -7,8 +7,8 @@ import java.util.UUID;
 
 public interface ClienteService {
     Cliente crear(Cliente cliente);
-    Cliente editar(Cliente cliente);
+    Cliente editar(Cliente cliente, UUID clienteId);
     void eliminar(UUID clienteId);
-    List<Cliente> obtenerClientes();
+    Iterable<Cliente> obtenerClientes();
     Cliente obtenerClientePorId(UUID clienteId);
 }

@@ -8,8 +8,8 @@ import java.util.UUID;
 
 public interface ClienteRepository {
     Cliente crear(Cliente cliente);
-    Cliente editar(Cliente cliente);
+    Cliente editar(Cliente cliente, UUID clienteId);
     void eliminar(UUID clienteId);
-    List<Cliente> obtenerClientes();
+    Iterable<Cliente> obtenerClientes();
     Optional<Cliente> obtenerClientePorId(UUID clienteId);
 }

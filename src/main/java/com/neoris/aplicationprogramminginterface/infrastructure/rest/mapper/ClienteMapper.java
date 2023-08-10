@@ -10,10 +10,10 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ClienteMapper {
-    //ClienteMapper INSTANCE = Mappers.getMapper(ClienteMapper.class);
+    ClienteMapper INSTANCE = Mappers.getMapper(ClienteMapper.class);
 
     Cliente toCliente(ClienteEntity clienteEntity);
-    List<Cliente> toClientes(List<ClienteEntity> clienteList);
+    Iterable<Cliente> toClientes(Iterable<ClienteEntity> clienteList);
     @InheritInverseConfiguration
     ClienteEntity toClienteEntity(Cliente cliente);
 }

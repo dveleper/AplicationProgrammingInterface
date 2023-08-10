@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -26,7 +25,7 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> getClients() {
+    public ResponseEntity<Iterable<Cliente>> getClients() {
         return new ResponseEntity<>(this.clienteService.obtenerClientes(), HttpStatus.OK);
     }
 
@@ -34,4 +33,15 @@ public class ClienteController {
     public ResponseEntity<Cliente> getClientById(@PathVariable UUID clienteId) {
         return new ResponseEntity<>(this.clienteService.obtenerClientePorId(clienteId), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{clienteId}")
+    public void deleteClient(@PathVariable UUID clienteId) {
+        this.clienteService.eliminar(clienteId);
+    }
+
+    @PutMapping("/{clienteId}")
+    public ResponseEntity<Cliente> updateClient(@PathVariable UUID clienteId, @RequestBody Cliente cliente) {
+        return new ResponseEntity<>(this.clienteService.editar(cliente, clienteId), HttpStatus.OK);
+    }
+
 }

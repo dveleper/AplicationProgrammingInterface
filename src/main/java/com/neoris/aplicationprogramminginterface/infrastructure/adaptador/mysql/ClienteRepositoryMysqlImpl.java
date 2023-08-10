@@ -2,6 +2,7 @@ package com.neoris.aplicationprogramminginterface.infrastructure.adaptador.mysql
 
 import com.neoris.aplicationprogramminginterface.domain.model.Cliente;
 import com.neoris.aplicationprogramminginterface.domain.port.ClienteRepository;
+import com.neoris.aplicationprogramminginterface.infrastructure.exceptions.ResourceNotFoundException;
 import com.neoris.aplicationprogramminginterface.infrastructure.rest.mapper.ClienteMapper;
 import com.neoris.aplicationprogramminginterface.infrastructure.entity.ClienteEntity;
 import org.springframework.context.annotation.Lazy;
@@ -26,9 +27,11 @@ public class ClienteRepositoryMysqlImpl implements ClienteRepository {
     }
 
     @Override
-    public Cliente editar(Cliente cliente) {
-        ClienteEntity saved = repositoryMysql.save(clienteMapper.toClienteEntity(cliente));
-        return clienteMapper.toCliente(saved);
+    public Cliente editar(Cliente cliente, UUID clienteId) {
+        return repositoryMysql.findById(clienteId)
+                .map(client_ ->
+                    clienteMapper.toCliente(repositoryMysql.save(clienteMapper.toClienteEntity(cliente))))
+                .orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado"));
     }
 
     @Override
@@ -38,20 +41,18 @@ public class ClienteRepositoryMysqlImpl implements ClienteRepository {
                     repositoryMysql.delete(entity);
                     return true;
                 })
-                 .orElseThrow(RuntimeException::new); //TODO: IMPLEMENTAR EXCEPCION PERSONALIZADA
+                 .orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado"));
     }
 
     @Override
-    public List<Cliente> obtenerClientes() {
-        List<ClienteEntity> clienteEntities = (List<ClienteEntity>) repositoryMysql.findAll();
-        if (clienteEntities.isEmpty()) throw new RuntimeException();
-        return clienteMapper.toClientes(clienteEntities);
+    public Iterable<Cliente> obtenerClientes() {
+        return clienteMapper.toClientes(repositoryMysql.findAll());
     }
 
     @Override
     public Optional<Cliente> obtenerClientePorId(UUID clienteId) {
         return Optional.of(repositoryMysql.findById(clienteId)
                 .map(clienteMapper::toCliente)
-                .orElseThrow()); //TODO: IMPLEMENTAR EXCEPCION PERSONALIZADA
+                .orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado")));
     }
 }

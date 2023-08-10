@@ -24,8 +24,8 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Cliente editar(Cliente cliente) {
-        return repository.editar(cliente);
+    public Cliente editar(Cliente cliente, UUID clienteId) {
+        return repository.editar(cliente, clienteId);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public List<Cliente> obtenerClientes() {
+    public Iterable<Cliente> obtenerClientes() {
         return repository.obtenerClientes();
     }
 
