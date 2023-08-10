@@ -1,4 +1,4 @@
-package com.neoris.aplicationprogramminginterface.infrastructure.adaptador.mysql;
+package com.neoris.aplicationprogramminginterface.infrastructure.adaptador.mysql.cliente;
 
 import com.neoris.aplicationprogramminginterface.domain.model.Cliente;
 import com.neoris.aplicationprogramminginterface.domain.port.ClienteRepository;
@@ -22,15 +22,19 @@ public class ClienteRepositoryMysqlImpl implements ClienteRepository {
 
     @Override
     public Cliente crear(Cliente cliente) {
-        ClienteEntity saved = repositoryMysql.save(clienteMapper.toClienteEntity(cliente));
-        return clienteMapper.toCliente(saved);
+        return clienteMapper.toCliente(
+                repositoryMysql.save(
+                        clienteMapper.toClienteEntity(cliente))
+        );
     }
 
     @Override
     public Cliente editar(Cliente cliente, UUID clienteId) {
         return repositoryMysql.findById(clienteId)
                 .map(client_ ->
-                    clienteMapper.toCliente(repositoryMysql.save(clienteMapper.toClienteEntity(cliente))))
+                    clienteMapper.toCliente(
+                            repositoryMysql.save(
+                                    clienteMapper.toClienteEntity(cliente))))
                 .orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado"));
     }
 
@@ -40,8 +44,7 @@ public class ClienteRepositoryMysqlImpl implements ClienteRepository {
                 .map(entity -> {
                     repositoryMysql.delete(entity);
                     return true;
-                })
-                 .orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado"));
+                }).orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado"));
     }
 
     @Override

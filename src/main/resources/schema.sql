@@ -28,15 +28,15 @@ CREATE TABLE cliente (
 --
 
 CREATE TABLE cuenta (
+  cuenta_id varchar(36) NOT NULL,
   numero varchar(20) NOT NULL,
-  tipo_cuenta varchar(10) NOT NULL,
-  saldo bigint NOT NULL DEFAULT '0',
+  tipo varchar(10) NOT NULL,
+  saldoInicial bigint NOT NULL DEFAULT '0',
   estado varchar(5) NOT NULL DEFAULT 'true',
   cliente_id varchar(36) DEFAULT NULL,
-  PRIMARY KEY (numero),
+  PRIMARY KEY (cuenta_id),
   KEY cliente_id_fk_idx (cliente_id),
-  CONSTRAINT cliente_id_fk FOREIGN KEY (cliente_id) REFERENCES cliente (cliente_id) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT cliente_id_fk FOREIGN KEY (cliente_id) REFERENCES cliente (cliente_id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Table structure for table movimiento
@@ -48,8 +48,8 @@ CREATE TABLE movimiento (
   tipo_movimiento varchar(15) NOT NULL,
   valor bigint NOT NULL,
   saldo bigint NOT NULL,
-  cuenta_id varchar(20) NOT NULL,
+  cuenta_id varchar(36) NOT NULL,
   PRIMARY KEY (movimiento_id),
   KEY cuenta_fk_idx (cuenta_id),
-  CONSTRAINT cuenta_fk FOREIGN KEY (cuenta_id) REFERENCES cuenta (numero)
+  CONSTRAINT cuenta_fk FOREIGN KEY (cuenta_id) REFERENCES cuenta (cuenta_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

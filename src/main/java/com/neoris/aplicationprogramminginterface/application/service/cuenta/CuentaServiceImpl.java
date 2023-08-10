@@ -3,7 +3,6 @@ package com.neoris.aplicationprogramminginterface.application.service.cuenta;
 import com.neoris.aplicationprogramminginterface.domain.model.Cuenta;
 import com.neoris.aplicationprogramminginterface.domain.port.CuentaRepository;
 
-import java.util.List;
 import java.util.UUID;
 
 public class CuentaServiceImpl implements CuentaService {
@@ -20,8 +19,8 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     @Override
-    public Cuenta editar(Cuenta cuenta) {
-        return repository.editar(cuenta);
+    public Cuenta editar(Cuenta cuenta, UUID cuentaId) {
+        return repository.editar(cuenta, cuentaId);
     }
 
     @Override
@@ -30,7 +29,7 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     @Override
-    public List<Cuenta> obtenerCuentas() {
+    public Iterable<Cuenta> obtenerCuentas() {
         return repository.obtenerCuentas();
     }
 
