@@ -2,10 +2,12 @@ package com.neoris.aplicationprogramminginterface.application.service.cliente;
 
 import com.neoris.aplicationprogramminginterface.domain.model.Cliente;
 import com.neoris.aplicationprogramminginterface.domain.port.ClienteRepository;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 public class ClienteServiceImpl implements ClienteService {
 
     private final ClienteRepository repository;
@@ -16,6 +18,8 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente crear(Cliente cliente) {
+        if (cliente.getClienteId() == null) cliente.setClienteId(UUID.randomUUID());
+        log.info("saving cliente ... {}", cliente.getClienteId());
         return repository.crear(cliente);
     }
 
