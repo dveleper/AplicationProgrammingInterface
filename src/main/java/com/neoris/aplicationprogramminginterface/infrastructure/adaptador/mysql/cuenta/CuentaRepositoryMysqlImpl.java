@@ -4,7 +4,6 @@ import com.neoris.aplicationprogramminginterface.domain.model.Cuenta;
 import com.neoris.aplicationprogramminginterface.domain.port.CuentaRepository;
 import com.neoris.aplicationprogramminginterface.infrastructure.adaptador.mysql.cliente.ClienteRepositoryMysql;
 import com.neoris.aplicationprogramminginterface.infrastructure.entity.ClienteEntity;
-import com.neoris.aplicationprogramminginterface.infrastructure.entity.CuentaEntity;
 import com.neoris.aplicationprogramminginterface.infrastructure.exceptions.ResourceNotFoundException;
 import com.neoris.aplicationprogramminginterface.infrastructure.rest.mapper.ClienteMapper;
 import com.neoris.aplicationprogramminginterface.infrastructure.rest.mapper.CuentaMapper;
