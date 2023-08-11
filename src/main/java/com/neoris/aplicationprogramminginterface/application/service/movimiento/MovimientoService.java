@@ -10,4 +10,5 @@ public interface MovimientoService {
     Movimiento editar(Movimiento movimiento, UUID movimientoId);
     void eliminar(UUID movimientoId);
     Iterable<Movimiento> obtenerMovimientos();
+    Movimiento obtenerMovimientoPorId(UUID movimientoId);
 }

@@ -39,6 +39,7 @@ public class MovimientoServiceImpl implements MovimientoService {
 
 
     private void afectarSaldo(Movimiento movimiento, Cuenta cuenta) {
+        log.info("afectando nuevo saldo en la cuenta");
         movimiento.setSaldo(cuenta.getSaldoInicial());
         BigInteger nuevoSaldo;
         switch (movimiento.getTipo()) {
@@ -67,5 +68,11 @@ public class MovimientoServiceImpl implements MovimientoService {
     public Iterable<Movimiento> obtenerMovimientos() {
         log.info("listando movimientos...");
         return repository.obtenerMovimientos();
+    }
+
+    @Override
+    public Movimiento obtenerMovimientoPorId(UUID movimientoId) {
+        log.info("buscando movimiento por id... {}", movimientoId);
+        return repository.obtenerMovimientoPorId(movimientoId);
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @RestControllerAdvice
 public class ExceptionConfig {
@@ -17,6 +18,14 @@ public class ExceptionConfig {
 
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<Error> handle(BusinessException e){
+        Error error = new Error();
+        error.setCode(HttpStatus.BAD_REQUEST.name());
+        error.setMessage(e.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<Error> handle(MethodArgumentTypeMismatchException e){
         Error error = new Error();
         error.setCode(HttpStatus.BAD_REQUEST.name());
         error.setMessage(e.getMessage());

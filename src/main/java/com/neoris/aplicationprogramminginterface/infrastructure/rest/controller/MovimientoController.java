@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/movimientos")
 @Slf4j
@@ -26,5 +28,10 @@ public class MovimientoController {
     @GetMapping
     public ResponseEntity<Iterable<Movimiento>> getTransactions() {
         return new ResponseEntity<>(movimientoService.obtenerMovimientos(), HttpStatus.OK);
+    }
+
+    @GetMapping("{movimientoId}")
+    public ResponseEntity<Movimiento> getTransactionById(@PathVariable UUID movimientoId){
+        return new ResponseEntity<>(movimientoService.obtenerMovimientoPorId(movimientoId), HttpStatus.OK);
     }
 }

@@ -2,6 +2,7 @@ package com.neoris.aplicationprogramminginterface.infrastructure.adaptador.mysql
 
 import com.neoris.aplicationprogramminginterface.domain.model.Movimiento;
 import com.neoris.aplicationprogramminginterface.domain.port.MovimientoRepository;
+import com.neoris.aplicationprogramminginterface.infrastructure.exceptions.BusinessException;
 import com.neoris.aplicationprogramminginterface.infrastructure.exceptions.ResourceNotFoundException;
 import com.neoris.aplicationprogramminginterface.infrastructure.rest.mapper.MovimientoMapper;
 import org.springframework.context.annotation.Lazy;
@@ -39,11 +40,18 @@ public class MovimientoRepositoryMysqlImpl implements MovimientoRepository {
                 .map(movimientoEntity -> {
                     movimientoRepositoryMysql.delete(movimientoEntity);
                             return true;
-                }).orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado"));
+                }).orElseThrow(() -> new ResourceNotFoundException("Movimiento no encontrado"));
     }
 
     @Override
     public Iterable<Movimiento> obtenerMovimientos() {
         return movimientoMapper.toMovimientos(movimientoRepositoryMysql.findAll());
+    }
+
+    @Override
+    public Movimiento obtenerMovimientoPorId(UUID movimientoId) {
+        return movimientoMapper.toMovimiento(
+                movimientoRepositoryMysql.findById(movimientoId)
+                        .orElseThrow(() -> new BusinessException("Movimiento no encontrado")));
     }
 }
