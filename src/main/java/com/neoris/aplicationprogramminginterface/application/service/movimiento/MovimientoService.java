@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface MovimientoService {
     Movimiento crear(Movimiento movimiento);
-    Movimiento editar(Movimiento movimiento);
+    Movimiento editar(Movimiento movimiento, UUID movimientoId);
     void eliminar(UUID movimientoId);
-    List<Movimiento> obtenerMovimientos();
+    Iterable<Movimiento> obtenerMovimientos();
 }

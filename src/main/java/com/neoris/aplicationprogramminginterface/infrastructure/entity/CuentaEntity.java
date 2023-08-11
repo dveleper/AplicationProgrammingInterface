@@ -24,6 +24,7 @@ public class CuentaEntity {
     private UUID cuentaId;
     private String numero;
     private String tipo;
+    @Column(name = "saldo_inicial")
     private BigInteger saldoInicial;
     private String estado;
     @ManyToOne

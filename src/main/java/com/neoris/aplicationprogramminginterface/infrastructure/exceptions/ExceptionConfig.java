@@ -12,6 +12,14 @@ public class ExceptionConfig {
         Error error = new Error();
         error.setCode(HttpStatus.NOT_FOUND.name());
         error.setMessage(e.getMessage());
-        return  new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<Error> handle(BusinessException e){
+        Error error = new Error();
+        error.setCode(HttpStatus.BAD_REQUEST.name());
+        error.setMessage(e.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 }

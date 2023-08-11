@@ -31,8 +31,8 @@ CREATE TABLE cuenta (
   cuenta_id varchar(36) NOT NULL,
   numero varchar(20) NOT NULL,
   tipo varchar(10) NOT NULL,
-  saldoInicial bigint NOT NULL DEFAULT '0',
-  estado varchar(5) NOT NULL DEFAULT 'true',
+  saldo_inicial bigint NOT NULL DEFAULT '0',
+  estado varchar(10) NOT NULL DEFAULT 'true',
   cliente_id varchar(36) DEFAULT NULL,
   PRIMARY KEY (cuenta_id),
   KEY cliente_id_fk_idx (cliente_id),
@@ -43,7 +43,7 @@ CREATE TABLE cuenta (
 --
 
 CREATE TABLE movimiento (
-  movimiento_id int NOT NULL AUTO_INCREMENT,
+  movimiento_id varchar(36) NOT NULL,
   fecha date NOT NULL,
   tipo_movimiento varchar(15) NOT NULL,
   valor bigint NOT NULL,
@@ -52,4 +52,4 @@ CREATE TABLE movimiento (
   PRIMARY KEY (movimiento_id),
   KEY cuenta_fk_idx (cuenta_id),
   CONSTRAINT cuenta_fk FOREIGN KEY (cuenta_id) REFERENCES cuenta (cuenta_id)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

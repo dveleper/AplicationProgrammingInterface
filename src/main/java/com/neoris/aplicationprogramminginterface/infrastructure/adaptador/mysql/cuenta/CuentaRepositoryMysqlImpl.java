@@ -72,4 +72,11 @@ public class CuentaRepositoryMysqlImpl implements CuentaRepository {
                 .map(cuentaMapper::toCuenta)
                 .orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado")));
     }
+
+    @Override
+    public Optional<Cuenta> obtenerCuentaPorNumero(String numero) {
+        return Optional.of(cuentaRepositoryMysql.findCuentaEntityByNumero(numero)
+                .map(cuentaMapper::toCuenta)
+                .orElseThrow(() -> new ResourceNotFoundException("Recurso no encontrado")));
+    }
 }

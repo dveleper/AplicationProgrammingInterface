@@ -1,6 +1,5 @@
 package com.neoris.aplicationprogramminginterface.domain.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

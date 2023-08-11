@@ -3,7 +3,9 @@ package com.neoris.aplicationprogramminginterface.infrastructure.adaptador.mysql
 import com.neoris.aplicationprogramminginterface.infrastructure.entity.CuentaEntity;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface CuentaRepositoryMysql extends CrudRepository<CuentaEntity, UUID> {
+    Optional<CuentaEntity> findCuentaEntityByNumero(String numero);
 }
