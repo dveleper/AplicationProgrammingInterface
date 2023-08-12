@@ -30,6 +30,7 @@ public class ClienteRepositoryMysqlImpl implements ClienteRepository {
 
     @Override
     public Cliente editar(Cliente cliente, UUID clienteId) {
+        cliente.setClienteId(clienteId);
         return repositoryMysql.findById(clienteId)
                 .map(client_ ->
                     clienteMapper.toCliente(
