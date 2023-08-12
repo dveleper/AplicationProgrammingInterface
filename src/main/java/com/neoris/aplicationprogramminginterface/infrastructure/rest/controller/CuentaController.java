@@ -29,9 +29,14 @@ public class CuentaController {
         return new ResponseEntity<>(this.cuentaService.obtenerCuentas(), HttpStatus.OK);
     }
 
-    @GetMapping("/{cuentaId}")
+    @GetMapping("/id/{cuentaId}")
     public ResponseEntity<Cuenta> getAccountById(@PathVariable UUID cuentaId) {
         return new ResponseEntity<>(this.cuentaService.obtenerCuentaPorId(cuentaId), HttpStatus.OK);
+    }
+
+    @GetMapping("/{numero}")
+    public ResponseEntity<Cuenta> getAccountByNumber(@PathVariable String numero) {
+        return new ResponseEntity<>(this.cuentaService.obtenerCuentaPorNumero(numero), HttpStatus.OK);
     }
 
     @DeleteMapping("/{cuentaId}")
