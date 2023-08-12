@@ -4,6 +4,7 @@ import com.neoris.aplicationprogramminginterface.domain.model.Movimiento;
 import com.neoris.aplicationprogramminginterface.domain.port.MovimientoRepository;
 import com.neoris.aplicationprogramminginterface.infrastructure.exceptions.BusinessException;
 import com.neoris.aplicationprogramminginterface.infrastructure.exceptions.ResourceNotFoundException;
+import com.neoris.aplicationprogramminginterface.infrastructure.rest.mapper.CuentaMapper;
 import com.neoris.aplicationprogramminginterface.infrastructure.rest.mapper.MovimientoMapper;
 import org.springframework.context.annotation.Lazy;
 
@@ -13,11 +14,13 @@ public class MovimientoRepositoryMysqlImpl implements MovimientoRepository {
 
     private final MovimientoRepositoryMysql movimientoRepositoryMysql;
     private final MovimientoMapper movimientoMapper;
+    private final CuentaMapper cuentaMapper;
 
     public MovimientoRepositoryMysqlImpl(@Lazy MovimientoRepositoryMysql movimientoRepositoryMysql,
-                                         MovimientoMapper movimientoMapper) {
+                                         MovimientoMapper movimientoMapper, CuentaMapper cuentaMapper) {
         this.movimientoRepositoryMysql = movimientoRepositoryMysql;
         this.movimientoMapper = movimientoMapper;
+        this.cuentaMapper = cuentaMapper;
     }
 
     @Override
@@ -29,9 +32,14 @@ public class MovimientoRepositoryMysqlImpl implements MovimientoRepository {
 
     @Override
     public Movimiento editar(Movimiento movimiento, UUID movimientoId) {
-        return movimientoMapper.toMovimiento(
-                movimientoRepositoryMysql.save(
-                        movimientoMapper.toMovimientoEntity(movimiento)));
+        return movimientoRepositoryMysql.findById(movimientoId)
+                .map(movimientoEntity -> {
+                    movimiento.setCuenta(cuentaMapper.toCuenta(movimientoEntity.getCuenta()));
+                    movimiento.setMovimientoId(movimientoId);
+                    movimientoRepositoryMysql.save(
+                        movimientoMapper.toMovimientoEntity(movimiento));
+            return movimiento;
+        }).orElseThrow(() -> new ResourceNotFoundException("Movimiento no encontrado"));
     }
 
     @Override

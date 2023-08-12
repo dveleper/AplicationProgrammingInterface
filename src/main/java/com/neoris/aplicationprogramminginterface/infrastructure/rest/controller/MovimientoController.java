@@ -27,11 +27,21 @@ public class MovimientoController {
 
     @GetMapping
     public ResponseEntity<Iterable<Movimiento>> getTransactions() {
-        return new ResponseEntity<>(movimientoService.obtenerMovimientos(), HttpStatus.OK);
+        return new ResponseEntity<>(this.movimientoService.obtenerMovimientos(), HttpStatus.OK);
     }
 
     @GetMapping("{movimientoId}")
     public ResponseEntity<Movimiento> getTransactionById(@PathVariable UUID movimientoId){
-        return new ResponseEntity<>(movimientoService.obtenerMovimientoPorId(movimientoId), HttpStatus.OK);
+        return new ResponseEntity<>(this.movimientoService.obtenerMovimientoPorId(movimientoId), HttpStatus.OK);
+    }
+
+    @DeleteMapping("{movimientoId}")
+    public void deleteTransaction(@PathVariable UUID movimientoId) {
+        this.movimientoService.eliminar(movimientoId);
+    }
+
+    @PutMapping("{movimientoId}")
+    public ResponseEntity<Movimiento> updateTransaction(@PathVariable UUID movimientoId, @RequestBody Movimiento movimiento) {
+        return new ResponseEntity<>(this.movimientoService.editar(movimiento, movimientoId), HttpStatus.OK);
     }
 }
