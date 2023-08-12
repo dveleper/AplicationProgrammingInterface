@@ -18,7 +18,7 @@ import java.util.UUID;
 public class CuentaEntity {
     @Id
     @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @GenericGenerator(name = "UUID")
     @Column(name = "cuenta_id", columnDefinition = "char(36)")
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID cuentaId;
