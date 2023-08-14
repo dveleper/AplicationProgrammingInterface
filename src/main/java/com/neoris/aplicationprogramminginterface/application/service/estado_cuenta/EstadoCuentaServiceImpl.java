@@ -3,10 +3,8 @@ package com.neoris.aplicationprogramminginterface.application.service.estado_cue
 import com.neoris.aplicationprogramminginterface.application.service.movimiento.MovimientoService;
 import com.neoris.aplicationprogramminginterface.domain.model.EstadoCuenta;
 
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 

@@ -2,13 +2,11 @@ package com.neoris.aplicationprogramminginterface.infrastructure.rest.controller
 
 import com.neoris.aplicationprogramminginterface.application.service.estado_cuenta.EstadoCuentaService;
 import com.neoris.aplicationprogramminginterface.domain.model.EstadoCuenta;
+import com.neoris.aplicationprogramminginterface.infrastructure.rest.InputEstadoCuenta;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.util.List;
@@ -28,9 +26,10 @@ public class EstadoCuentaController {
 
     @GetMapping("/reportes")
     public ResponseEntity<List<EstadoCuenta>> getEstadoCuenta(@RequestParam(name = "ini") String fecha_inicial,
-                                                              @RequestParam(name = "fin") String fecha_final) {
+                                                              @RequestParam(name = "fin") String fecha_final,
+                                                              @RequestBody InputEstadoCuenta estadoCuenta) {
         try {
-           return new ResponseEntity<>(this.estadoCuentaService.getEstadoCuentaPorFechas("123654",
+           return new ResponseEntity<>(this.estadoCuentaService.getEstadoCuentaPorFechas(estadoCuenta.getIdentificacion(),
                     getDateFormat(fecha_inicial),
                     getDateFormat(fecha_final)), HttpStatus.OK);
         } catch (ParseException e) {
