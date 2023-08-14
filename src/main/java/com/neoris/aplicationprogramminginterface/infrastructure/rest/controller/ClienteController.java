@@ -35,8 +35,8 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{clienteId}")
-    public void deleteClient(@PathVariable UUID clienteId) {
-        this.clienteService.eliminar(clienteId);
+    public ResponseEntity deleteClient(@PathVariable UUID clienteId) {
+        return new ResponseEntity<>(String.format("Cliente %s deleted.", clienteId), HttpStatus.OK);
     }
 
     @PutMapping("/{clienteId}")
