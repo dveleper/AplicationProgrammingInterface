@@ -4,6 +4,8 @@ import com.neoris.aplicationprogramminginterface.application.service.cliente.Cli
 import com.neoris.aplicationprogramminginterface.application.service.cliente.ClienteServiceImpl;
 import com.neoris.aplicationprogramminginterface.application.service.cuenta.CuentaService;
 import com.neoris.aplicationprogramminginterface.application.service.cuenta.CuentaServiceImpl;
+import com.neoris.aplicationprogramminginterface.application.service.estado_cuenta.EstadoCuentaService;
+import com.neoris.aplicationprogramminginterface.application.service.estado_cuenta.EstadoCuentaServiceImpl;
 import com.neoris.aplicationprogramminginterface.application.service.movimiento.MovimientoService;
 import com.neoris.aplicationprogramminginterface.application.service.movimiento.MovimientoServiceImpl;
 import com.neoris.aplicationprogramminginterface.domain.port.ClienteRepository;
@@ -29,5 +31,10 @@ public class BeanConfiguration {
     MovimientoService movimientoBeanService(final MovimientoRepository movimientoRepository,
                                             final CuentaService cuentaService) {
         return new MovimientoServiceImpl(movimientoRepository, cuentaService);
+    }
+
+    @Bean
+    EstadoCuentaService estadoCuentaBeanService(final MovimientoService movimientoService) {
+        return new EstadoCuentaServiceImpl(movimientoService);
     }
 }

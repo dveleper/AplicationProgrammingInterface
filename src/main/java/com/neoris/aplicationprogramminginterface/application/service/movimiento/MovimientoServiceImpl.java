@@ -2,13 +2,17 @@ package com.neoris.aplicationprogramminginterface.application.service.movimiento
 
 import com.neoris.aplicationprogramminginterface.application.service.cuenta.CuentaService;
 import com.neoris.aplicationprogramminginterface.domain.model.Cuenta;
+import com.neoris.aplicationprogramminginterface.domain.model.EstadoCuenta;
 import com.neoris.aplicationprogramminginterface.domain.model.Movimiento;
 import com.neoris.aplicationprogramminginterface.domain.port.MovimientoRepository;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
+
+import static com.neoris.aplicationprogramminginterface.infrastructure.Utilidades.asDate;
 
 @Slf4j
 public class MovimientoServiceImpl implements MovimientoService {
@@ -74,5 +78,25 @@ public class MovimientoServiceImpl implements MovimientoService {
     public Movimiento obtenerMovimientoPorId(UUID movimientoId) {
         log.info("buscando movimiento por id... {}", movimientoId);
         return repository.obtenerMovimientoPorId(movimientoId);
+    }
+
+    @Override
+    public List<EstadoCuenta> getEstadoCuentaPorFechas(String identificacion,
+                                                           LocalDate fechaInicial,
+                                                           LocalDate fechaFinal) {
+        return repository.obtenerEstadoCuenta(identificacion, fechaInicial, fechaFinal)
+                .stream()
+                .map(movimiento -> {
+                    EstadoCuenta estadoCuenta = new EstadoCuenta();
+                    estadoCuenta.setFecha(asDate(movimiento.getFecha()));
+                    estadoCuenta.setCliente(movimiento.getCuenta().getCliente().getNombre());
+                    estadoCuenta.setNumeroCuenta(movimiento.getCuenta().getNumero());
+                    estadoCuenta.setTipo(movimiento.getCuenta().getTipo());
+                    estadoCuenta.setSaldoInicial(movimiento.getSaldo());
+                    estadoCuenta.setMovimiento(movimiento.getValor());
+                    estadoCuenta.setSaldoDisponible(movimiento.getCuenta().getSaldoInicial());
+                    return estadoCuenta;
+                }).toList();
+
     }
 }

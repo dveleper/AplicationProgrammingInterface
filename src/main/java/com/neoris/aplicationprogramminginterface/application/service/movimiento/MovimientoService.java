@@ -1,7 +1,10 @@
 package com.neoris.aplicationprogramminginterface.application.service.movimiento;
 
+import com.neoris.aplicationprogramminginterface.domain.model.EstadoCuenta;
 import com.neoris.aplicationprogramminginterface.domain.model.Movimiento;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public interface MovimientoService {
@@ -10,4 +13,8 @@ public interface MovimientoService {
     void eliminar(UUID movimientoId);
     Iterable<Movimiento> obtenerMovimientos();
     Movimiento obtenerMovimientoPorId(UUID movimientoId);
+    List<EstadoCuenta> getEstadoCuentaPorFechas(String identificacion,
+                                                LocalDate fechaInicial,
+                                                LocalDate fechaFinal);
+
 }

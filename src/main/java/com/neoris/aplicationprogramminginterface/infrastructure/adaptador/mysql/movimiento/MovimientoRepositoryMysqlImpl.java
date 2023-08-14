@@ -8,6 +8,8 @@ import com.neoris.aplicationprogramminginterface.infrastructure.rest.mapper.Cuen
 import com.neoris.aplicationprogramminginterface.infrastructure.rest.mapper.MovimientoMapper;
 import org.springframework.context.annotation.Lazy;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 public class MovimientoRepositoryMysqlImpl implements MovimientoRepository {
@@ -61,5 +63,11 @@ public class MovimientoRepositoryMysqlImpl implements MovimientoRepository {
         return movimientoMapper.toMovimiento(
                 movimientoRepositoryMysql.findById(movimientoId)
                         .orElseThrow(() -> new BusinessException("Movimiento no encontrado")));
+    }
+
+    @Override
+    public List<Movimiento> obtenerEstadoCuenta(String identificacion, LocalDate fechaInicial, LocalDate fechaFinal) {
+        return movimientoMapper.toMovimientos(movimientoRepositoryMysql
+                .getMovimientosByClientAndDates(identificacion, fechaInicial, fechaFinal));
     }
 }
