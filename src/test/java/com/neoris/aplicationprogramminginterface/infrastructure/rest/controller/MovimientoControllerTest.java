@@ -42,6 +42,7 @@ class MovimientoControllerTest {
     @BeforeEach
     void setUp() {
         objectMapper = new ObjectMapper();
+        objectMapper.findAndRegisterModules();
         buildMovimiento();
         buildMovimientos();
     }
@@ -54,7 +55,7 @@ class MovimientoControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.valor").value(new BigInteger("500000")))
-                .andExpect(jsonPath("$.tipo", is(CREDITO)));
+                .andExpect(jsonPath("$.tipo", is(CREDITO.toString())));
         verify(movimientoService).crear(any());
     }
 
