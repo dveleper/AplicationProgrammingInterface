@@ -8,7 +8,7 @@ import java.util.UUID;
 public interface CuentaRepository {
     Cuenta crear(Cuenta cuenta);
     Cuenta editar(Cuenta cuenta, UUID cuentaId);
-    void eliminar(UUID cuentaId);
+    boolean eliminar(UUID cuentaId);
     Iterable<Cuenta> obtenerCuentas();
     Optional<Cuenta> obtenerCuentaPorId(UUID cuentaId);
     Optional<Cuenta> obtenerCuentaPorNumero(String numero);

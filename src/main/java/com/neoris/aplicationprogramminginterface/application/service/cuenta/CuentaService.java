@@ -8,7 +8,7 @@ import java.util.UUID;
 public interface CuentaService {
     Cuenta crear(Cuenta cuenta);
     Cuenta editar(Cuenta cuenta, UUID cuentaId);
-    void eliminar(UUID cuentaId);
+    boolean eliminar(UUID cuentaId);
     Iterable<Cuenta> obtenerCuentas();
     Cuenta obtenerCuentaPorId(UUID cuentaId);
     Cuenta obtenerCuentaPorNumero(String numero);

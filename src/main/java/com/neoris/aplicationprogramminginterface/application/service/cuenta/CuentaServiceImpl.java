@@ -30,9 +30,9 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     @Override
-    public void eliminar(UUID cuentaId) {
+    public boolean eliminar(UUID cuentaId) {
         log.info("eliminando cuenta... {}", cuentaId);
-        repository.eliminar(cuentaId);
+        return repository.eliminar(cuentaId);
     }
 
     @Override

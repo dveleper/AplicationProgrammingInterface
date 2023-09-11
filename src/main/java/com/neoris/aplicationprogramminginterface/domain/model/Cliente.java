@@ -1,11 +1,11 @@
 package com.neoris.aplicationprogramminginterface.domain.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.util.UUID;
 
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Cliente extends Persona {
     private UUID clienteId;

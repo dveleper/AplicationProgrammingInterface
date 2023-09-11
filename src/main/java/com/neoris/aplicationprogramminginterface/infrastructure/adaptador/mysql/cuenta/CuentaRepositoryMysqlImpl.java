@@ -53,8 +53,8 @@ public class CuentaRepositoryMysqlImpl implements CuentaRepository {
     }
 
     @Override
-    public void eliminar(UUID cuentaId) {
-        cuentaRepositoryMysql.findById(cuentaId)
+    public boolean eliminar(UUID cuentaId) {
+        return cuentaRepositoryMysql.findById(cuentaId)
                 .map(cuentaEntity -> {
                     cuentaRepositoryMysql.delete(cuentaEntity);
                     return true;
