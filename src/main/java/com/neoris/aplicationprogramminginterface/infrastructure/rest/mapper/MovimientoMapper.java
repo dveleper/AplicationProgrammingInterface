@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface MovimientoMapper {
-    MovimientoMapper INSTANCE = Mappers.getMapper(MovimientoMapper.class);
+    //MovimientoMapper INSTANCE = Mappers.getMapper(MovimientoMapper.class);
     Movimiento toMovimiento(MovimientoEntity movimientoEntity);
     List<Movimiento> toMovimientos(Iterable<MovimientoEntity> movimientos);
     @InheritInverseConfiguration

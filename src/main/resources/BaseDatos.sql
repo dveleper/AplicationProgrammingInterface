@@ -60,7 +60,6 @@ CREATE TABLE movimiento (
                             CONSTRAINT cuenta_fk FOREIGN KEY (cuenta_id) REFERENCES cuenta (cuenta_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
 insert into persona (identificacion, nombre, genero, edad, direccion, telefono)
 values ("123654", "Jose Lema", "masculino", 32, "Otavalo sn y principal", "098254785");
 
