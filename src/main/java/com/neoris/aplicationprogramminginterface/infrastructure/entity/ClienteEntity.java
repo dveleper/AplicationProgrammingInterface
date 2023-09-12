@@ -11,15 +11,11 @@ import org.hibernate.type.SqlTypes;
 
 import java.util.UUID;
 
-//@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "cliente")
 @Getter
 @Setter
 public class ClienteEntity extends PersonaEntity {
-    //@Id
-    //@GeneratedValue(generator = "UUID")
-    //@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "cliente_id", columnDefinition = "char(36)")
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID clienteId;

@@ -1,7 +1,6 @@
 package com.neoris.aplicationprogramminginterface.infrastructure.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
