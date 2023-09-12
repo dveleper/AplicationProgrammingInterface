@@ -1,15 +1,32 @@
 package com.neoris.aplicationprogramminginterface.infrastructure.entity;
 
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@MappedSuperclass
+@Entity
+@Table(name = "persona")
+@Inheritance(strategy= InheritanceType.JOINED)
+@Getter
+@Setter
 public class PersonaEntity {
+    @Id
+    @Column(nullable = false, length = 20)
     private String identificacion;
+
+    @Column(nullable = false, length = 45)
     private String nombre;
+
+    @Column(nullable = false, length = 10)
     private String genero;
-    private int edad;
+
+    @Column(nullable = false, length = 3)
+    private Integer edad;
+
+    @Column(nullable = false, length = 60)
     private String direccion;
+
+    @Column(nullable = false, length = 20)
     private String telefono;
 }
