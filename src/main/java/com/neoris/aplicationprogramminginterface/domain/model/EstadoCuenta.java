@@ -2,17 +2,14 @@ package com.neoris.aplicationprogramminginterface.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Value
+@AllArgsConstructor
 public class EstadoCuenta {
     @JsonFormat(pattern="dd/MM/yyyy")
     @JsonProperty("Fecha")
@@ -24,10 +21,12 @@ public class EstadoCuenta {
     @JsonProperty("Tipo")
     private String tipo;
     @JsonProperty("Saldo Inicial")
-    private BigInteger saldoInicial;
+    private Long saldoInicial;
+    @JsonProperty("Estado")
+    private String estado;
     @JsonProperty("Movimiento")
-    private BigInteger movimiento;
+    private Long movimiento;
     @JsonProperty("Saldo Disponible")
-    private BigInteger saldoDisponible;
+    private Long saldoDisponible;
 
 }

@@ -6,10 +6,10 @@ import com.neoris.aplicationprogramminginterface.infrastructure.exceptions.Busin
 import com.neoris.aplicationprogramminginterface.infrastructure.exceptions.ResourceNotFoundException;
 import com.neoris.aplicationprogramminginterface.infrastructure.rest.mapper.CuentaMapper;
 import com.neoris.aplicationprogramminginterface.infrastructure.rest.mapper.MovimientoMapper;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.context.annotation.Lazy;
 
-import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 public class MovimientoRepositoryMysqlImpl implements MovimientoRepository {
@@ -17,6 +17,9 @@ public class MovimientoRepositoryMysqlImpl implements MovimientoRepository {
     private final MovimientoRepositoryMysql movimientoRepositoryMysql;
     private final MovimientoMapper movimientoMapper;
     private final CuentaMapper cuentaMapper;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public MovimientoRepositoryMysqlImpl(@Lazy MovimientoRepositoryMysql movimientoRepositoryMysql,
                                          MovimientoMapper movimientoMapper, CuentaMapper cuentaMapper) {
@@ -63,11 +66,5 @@ public class MovimientoRepositoryMysqlImpl implements MovimientoRepository {
         return movimientoMapper.toMovimiento(
                 movimientoRepositoryMysql.findById(movimientoId)
                         .orElseThrow(() -> new BusinessException("Movimiento no encontrado")));
-    }
-
-    @Override
-    public List<Movimiento> obtenerEstadoCuenta(String identificacion, LocalDate fechaInicial, LocalDate fechaFinal) {
-        return movimientoMapper.toMovimientos(movimientoRepositoryMysql
-                .getMovimientosByClientAndDates(identificacion, fechaInicial, fechaFinal));
     }
 }

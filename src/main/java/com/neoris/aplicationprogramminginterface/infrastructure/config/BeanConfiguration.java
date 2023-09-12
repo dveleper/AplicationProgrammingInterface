@@ -10,6 +10,7 @@ import com.neoris.aplicationprogramminginterface.application.service.movimiento.
 import com.neoris.aplicationprogramminginterface.application.service.movimiento.MovimientoServiceImpl;
 import com.neoris.aplicationprogramminginterface.domain.port.ClienteRepository;
 import com.neoris.aplicationprogramminginterface.domain.port.CuentaRepository;
+import com.neoris.aplicationprogramminginterface.domain.port.EstadoCuentaRepository;
 import com.neoris.aplicationprogramminginterface.domain.port.MovimientoRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,7 +35,8 @@ public class BeanConfiguration {
     }
 
     @Bean
-    EstadoCuentaService estadoCuentaBeanService(final MovimientoService movimientoService) {
-        return new EstadoCuentaServiceImpl(movimientoService);
+    EstadoCuentaService estadoCuentaBeanService(final EstadoCuentaRepository repository) {
+        return new EstadoCuentaServiceImpl(repository);
     }
+
 }
