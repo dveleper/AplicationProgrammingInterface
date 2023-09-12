@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.util.List;
 
-import static com.neoris.aplicationprogramminginterface.infrastructure.Utilidades.getDateFormat;
-
 @RestController
 @RequestMapping("/api")
 @Slf4j
@@ -30,8 +28,8 @@ public class EstadoCuentaController {
                                                               @RequestBody InputEstadoCuenta estadoCuenta) {
         try {
            return new ResponseEntity<>(this.estadoCuentaService.getEstadoCuentaPorFechas(estadoCuenta.getIdentificacion(),
-                    getDateFormat(fecha_inicial),
-                    getDateFormat(fecha_final)), HttpStatus.OK);
+                    fecha_inicial,
+                    fecha_final), HttpStatus.OK);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

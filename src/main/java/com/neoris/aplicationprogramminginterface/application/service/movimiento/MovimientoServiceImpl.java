@@ -2,17 +2,13 @@ package com.neoris.aplicationprogramminginterface.application.service.movimiento
 
 import com.neoris.aplicationprogramminginterface.application.service.cuenta.CuentaService;
 import com.neoris.aplicationprogramminginterface.domain.model.Cuenta;
-import com.neoris.aplicationprogramminginterface.domain.model.EstadoCuenta;
 import com.neoris.aplicationprogramminginterface.domain.model.Movimiento;
 import com.neoris.aplicationprogramminginterface.domain.port.MovimientoRepository;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
-
-import static com.neoris.aplicationprogramminginterface.infrastructure.Utilidades.asDate;
 
 @Slf4j
 public class MovimientoServiceImpl implements MovimientoService {
@@ -79,12 +75,4 @@ public class MovimientoServiceImpl implements MovimientoService {
         log.info("buscando movimiento por id... {}", movimientoId);
         return repository.obtenerMovimientoPorId(movimientoId);
     }
-
-    @Override
-    public List<EstadoCuenta> getEstadoCuentaPorFechas(String identificacion,
-                                                           LocalDate fechaInicial,
-                                                           LocalDate fechaFinal) {
-        return repository.obtenerEstadoCuentaNative(identificacion);
-    }
-
 }

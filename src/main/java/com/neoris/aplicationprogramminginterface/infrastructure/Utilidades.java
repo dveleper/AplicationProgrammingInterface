@@ -16,4 +16,11 @@ public class Utilidades {
     public static Date asDate(LocalDate localDate) {
         return  Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }
+
+    public static LocalDate convertStringToLocalDate(String dateToConvert) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("ddMMyyyy");
+        return format.parse(dateToConvert).toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
 }
