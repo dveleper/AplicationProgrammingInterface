@@ -84,19 +84,7 @@ public class MovimientoServiceImpl implements MovimientoService {
     public List<EstadoCuenta> getEstadoCuentaPorFechas(String identificacion,
                                                            LocalDate fechaInicial,
                                                            LocalDate fechaFinal) {
-        return repository.obtenerEstadoCuenta(identificacion, fechaInicial, fechaFinal)
-                .stream()
-                .map(movimiento -> {
-                    EstadoCuenta estadoCuenta = new EstadoCuenta();
-                    estadoCuenta.setFecha(asDate(movimiento.getFecha()));
-                    estadoCuenta.setCliente(movimiento.getCuenta().getCliente().getNombre());
-                    estadoCuenta.setNumeroCuenta(movimiento.getCuenta().getNumero());
-                    estadoCuenta.setTipo(movimiento.getCuenta().getTipo());
-                    estadoCuenta.setSaldoInicial(movimiento.getSaldo());
-                    estadoCuenta.setMovimiento(movimiento.getValor());
-                    estadoCuenta.setSaldoDisponible(movimiento.getCuenta().getSaldoInicial());
-                    return estadoCuenta;
-                }).toList();
-
+        return repository.obtenerEstadoCuentaNative(identificacion);
     }
+
 }

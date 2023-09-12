@@ -95,6 +95,23 @@ insert into cuenta (cuenta_id, numero, tipo, saldo_inicial, estado, cliente_id)
 values ("a2720191-1cc6-22eb-9a2c-107d1a24f959", "585545", "Corriente", 1000, "true", "123654");
 
 insert into movimiento (movimiento_id, fecha, tipo_movimiento, valor, saldo, cuenta_id)
-values ("a2720191-1cc6-22eb-9a2c-107d1a24f956", SYSDATE(), "CREDITO", 200, 200, "a2720191-1cc6-22eb-9a2c-107d1a24f955");
+values ("a2720191-1cc6-22eb-9a2c-107d1a24f956", SYSDATE(), "DEBITO", -575, 2000, "a2720191-1cc6-22eb-9a2c-107d1a24f955");
+
+update cuenta set saldo_inicial = 1425 where cuenta_id = "a2720191-1cc6-22eb-9a2c-107d1a24f955";
+--
+insert into movimiento (movimiento_id, fecha, tipo_movimiento, valor, saldo, cuenta_id)
+values ("a2720191-1cc6-22eb-9a2c-107d1a24f957", SYSDATE(), "CREDITO", 600, 100, "a2720191-1cc6-22eb-9a2c-107d1a24f956");
+
+update cuenta set saldo_inicial = 700 where cuenta_id = "a2720191-1cc6-22eb-9a2c-107d1a24f956";
+--
+insert into movimiento (movimiento_id, fecha, tipo_movimiento, valor, saldo, cuenta_id)
+values ("a2720191-1cc6-22eb-9a2c-107d1a24f958", SYSDATE(), "CREDITO", 150, 0, "a2720191-1cc6-22eb-9a2c-107d1a24f957");
+
+update cuenta set saldo_inicial = 150 where cuenta_id = "a2720191-1cc6-22eb-9a2c-107d1a24f957";
+--
+insert into movimiento (movimiento_id, fecha, tipo_movimiento, valor, saldo, cuenta_id)
+values ("a2720191-1cc6-22eb-9a2c-107d1a24f959", SYSDATE(), "DEBITO", -540, 540, "a2720191-1cc6-22eb-9a2c-107d1a24f958");
+
+update cuenta set saldo_inicial = 0 where cuenta_id = "a2720191-1cc6-22eb-9a2c-107d1a24f958";
 
 commit;
